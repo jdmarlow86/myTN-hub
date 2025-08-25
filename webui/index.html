@@ -1,80 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>East Tennessee Hub (myTN)</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./style.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>East Tennessee Hub (myTN)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
-    <header class="site-header">
-        <div class="brand">
-            <img src="./assets/logo.svg" alt="" class="logo" />
-            <div>
-                <h1>East Tennessee Hub</h1>
-                <p class="tagline">Practical help, right when you need it.</p>
-            </div>
+  <header class="site-header">
+    <div class="brand">
+      <img src="./assets/logo.svg" alt="" class="logo" />
+      <div>
+        <h1>East Tennessee Hub</h1>
+        <p class="tagline">Practical help, right when you need it.</p>
+      </div>
+    </div>
+    <div class="status">
+      <span id="apiStatus" class="badge badge--muted">Checking API…</span>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Category selection card removed -->
+
+    <section class="card">
+      <h2>Describe your goal</h2>
+      <label for="goalInput" class="visually-hidden">Describe your goal</label>
+      <textarea id="goalInput" rows="3" placeholder="e.g., 'Help a senior set up a Wi‑Fi printer'"></textarea>
+
+      <div class="kv" style="margin-top:.6rem">
+        <dt>Detected category</dt>
+        <dd id="detectedLabel">Detecting…</dd>
+        <dt>Agent code</dt>
+        <dd id="detectedCode">—</dd>
+      </div>
+
+      <p class="hint">Tip: use plain language like “write a press release…”, “find seasonal crops…”, “plan a hike…”. We’ll pick the right helper.</p>
+
+      <div class="actions">
+        <button id="runBtn" class="btn btn-primary">
+          <span class="btn-label">Get help</span>
+          <span class="spinner hidden" aria-hidden="true"></span>
+        </button>
+        <button id="clearBtn" class="btn btn-secondary">Clear</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card-header">
+        <h2>Result</h2>
+        <div class="card-tools">
+          <button id="toggleJson" class="btn btn-ghost" aria-pressed="false">Show JSON</button>
         </div>
-        <div class="status">
-            <span id="apiStatus" class="badge badge--muted">Checking API�</span>
+      </div>
+      <div id="result" class="result" aria-live="polite"></div>
+      <pre id="resultJson" class="result-json hidden" aria-live="polite"></pre>
+    </section>
+
+    <section class="card">
+      <div class="card-header">
+        <h2>Recent Action Receipts</h2>
+        <div class="card-tools">
+          <button id="refreshReceipts" class="btn btn-ghost">Refresh</button>
+          <button id="exportCsv" class="btn btn-ghost">Export CSV</button>
         </div>
-    </header>
+      </div>
+      <div id="receipts" class="receipts"></div>
+    </section>
+  </main>
 
-    <main class="container">
-        <section class="card">
-            <h2>1) What kind of help do you need?</h2>
-            <div id="agentGrid" class="agent-grid" role="group" aria-label="Choose a category">
-                <!-- Agent buttons rendered by JS -->
-            </div>
-            <p class="hint">Tip: You can change categories anytime.</p>
-        </section>
+  <footer class="site-footer">
+    <p>myTN • East Tennessee Hub &middot; <a href="#" id="apiOriginLabel">API origin</a></p>
+  </footer>
 
-        <section class="card">
-            <h2>2) Describe your goal</h2>
-            <label for="goalInput" class="visually-hidden">Describe your goal</label>
-            <textarea id="goalInput" rows="3" placeholder="e.g., 'Help a senior set up a Wi?Fi printer'"></textarea>
-            <div class="actions">
-                <button id="runBtn" class="btn btn-primary">
-                    <span class="btn-label">Get help</span>
-                    <span class="spinner hidden" aria-hidden="true"></span>
-                </button>
-                <button id="clearBtn" class="btn btn-secondary">Clear</button>
-            </div>
-            <p class="hint">We�ll send your request to the right helper and save an action receipt automatically.</p>
-        </section>
-
-        <section class="card">
-            <div class="card-header">
-                <h2>Result</h2>
-                <div class="card-tools">
-                    <button id="toggleJson" class="btn btn-ghost" aria-pressed="false">Show JSON</button>
-                </div>
-            </div>
-            <div id="result" class="result" aria-live="polite"></div>
-            <pre id="resultJson" class="result-json hidden" aria-live="polite"></pre>
-        </section>
-
-        <section class="card">
-            <div class="card-header">
-                <h2>Recent Action Receipts</h2>
-                <div class="card-tools">
-                    <button id="refreshReceipts" class="btn btn-ghost">Refresh</button>
-                    <button id="exportCsv" class="btn btn-ghost">Export CSV</button>
-                </div>
-            </div>
-            <div id="receipts" class="receipts"></div>
-        </section>
-    </main>
-
-    <footer class="site-footer">
-        <p>myTN � East Tennessee Hub &middot; <a href="#" id="apiOriginLabel">API origin</a></p>
-    </footer>
-
-    <script src="./config.js"></script>
-    <script src="./app.js"></script>
+  <script src="./config.js"></script>
+  <script src="./app.js"></script>
 </body>
 </html>
-
